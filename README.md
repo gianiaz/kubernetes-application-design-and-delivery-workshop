@@ -49,7 +49,7 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-
 ```
 
 #### Kubectl
-Install Kubectl.
+It's necessary to have `kubectl` installed. `Kubectl` is the CLI tool to interact with Kubernetes.
 
 On macOS:  
 ```shell
