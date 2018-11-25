@@ -1,4 +1,4 @@
-# Kubernetes Application Design
+# Kubernetes Application Design Workshop by [SIGHUP](https://sighup.io)
 
 Welcome to the Kubernetes Application Design and Delivery workshop. This workshop is organized by [SIGHUP](https://sighup.io) and aims to provide a comprehensive deep dive on the patterns and best practices that could be adopted when developing distributed applications on Kubernetes.
 
