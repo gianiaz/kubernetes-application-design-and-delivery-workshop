@@ -12,7 +12,7 @@ In this repo you will find all the code used during the workshop. In case you ar
 
 In this hands-on workshop we are going to dive deep into the principles, development patterns and best practices to adopt while developing and deploying your services to Kubernetes. For this workshop you must have a good understanding of the core domain concepts of Kubernetes as we will focus on more advanced aspects for both stateless and stateful applications. We will see what best practices and design patterns to adopt while developing applications, how to make them scalable, how to integrate and monitor your applications with Prometheus and what logging strategies to ensure when developing container based applications. We will also focus on security with a clear overview of the Kubernetes RBAC model and how to secure and isolate correctly your applications.
 
-#### Program
+## Program
 
 1. A quick review of the Kubernetes core domain concepts  
 2. Troubleshooting and debugging Applications on Kubernetes  
@@ -73,3 +73,12 @@ As a bonus, you should install `kubectx` and `kubens` [(installation instruction
 
 Install `kustomize` and `helm`. To install Kustomize, [here you can find the installation instructions](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md). Same goes for [helm](https://github.com/helm/helm#install)
 
+### Using Minikube
+
+On macOS:  
+```shell
+```
+
+On Linux:  
+```shell
+```
