@@ -25,3 +25,17 @@ In this hands-on workshop we are going to dive deep into the principles, develop
 
 You can contact the authors of this workshop by email at [training@sighup.io](mailto:training@sighup.io)
 
+### Setup & Environment
+
+During the workshop, we encourage participants to work in pair. Therefore at least one computer per couple should be available and correctly configured.
+
+#### Kubernetes
+
+1. Each couple should have access to a Kubernetes cluster. This could be [minikube](https://github.com/kubernetes/minikube#installation) or [Kubernetes on docker](https://www.docker.com/get-started) to have kubernetes running on your machine. It could also be a public cloud cluster or some cluster you decided to setup yourself. It's important that you have full unrestricted access to the test cluster you will use. For a simple and hassle-free setup we recommend using [minikube](https://github.com/kubernetes/minikube#installation).
+
+2. Have [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) installed
+
+3. Install `kubectx` and `kubens` [(installation instructions here)](https://github.com/ahmetb/kubectx#installation), they are not strictly required but are actually priceless, so... why not.
+
+4. Install `kustomize` and `helm`. To install Kustomize, [here you can find the installation instructions](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md). Same goes for [helm](https://github.com/helm/helm#install)
+
