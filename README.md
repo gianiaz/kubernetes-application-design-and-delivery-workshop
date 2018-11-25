@@ -31,11 +31,45 @@ During the workshop, we encourage participants to work in pair. Therefore at lea
 
 #### Kubernetes
 
-1. Each couple should have access to a Kubernetes cluster. This could be [minikube](https://github.com/kubernetes/minikube#installation) or [Kubernetes on docker](https://www.docker.com/get-started) to have kubernetes running on your machine. It could also be a public cloud cluster or some cluster you decided to setup yourself. It's important that you have full unrestricted access to the test cluster you will use. For a simple and hassle-free setup we recommend using [minikube](https://github.com/kubernetes/minikube#installation).
+You should have access to a Kubernetes cluster. You can very easily provision a single-node cluster on your machine with `minikube` as well can use any other Kubernetes cluster from public clouds or self-provisioning.
 
-2. Have [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl) installed
+##### Minikube
+Here you can find [installation instructions](https://github.com/kubernetes/minikube#installation) for your system to easily get `minikube` up and running. Note that you will need to have a hypervisor installed (something like Virtualbox).
 
-3. Install `kubectx` and `kubens` [(installation instructions here)](https://github.com/ahmetb/kubectx#installation), they are not strictly required but are actually priceless, so... why not.
+For macOS:  
 
-4. Install `kustomize` and `helm`. To install Kustomize, [here you can find the installation instructions](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md). Same goes for [helm](https://github.com/helm/helm#install)
+```shell
+brew cask install minikube
+```
+
+For Linux:  
+```shell
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+  && sudo install minikube-linux-amd64 /usr/local/bin/minikube
+```
+
+#### Kubectl
+Install Kubectl.
+
+On macOS:  
+```shell
+brew install kubernetes-cli
+```
+
+On Linux Ubuntu/Debian:  
+```shell
+sudo apt-get update && sudo apt-get install -y apt-transport-https
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
+```
+
+For other OS, refer to the [official install docs](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl)
+
+As a bonus, you should install `kubectx` and `kubens` [(installation instructions here)](https://github.com/ahmetb/kubectx#installation), they are not strictly required but are actually priceless, so... why not.
+
+#### Helm and Kustomize
+
+Install `kustomize` and `helm`. To install Kustomize, [here you can find the installation instructions](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md). Same goes for [helm](https://github.com/helm/helm#install)
 
