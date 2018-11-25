@@ -14,14 +14,14 @@ In this hands-on workshop we are going to dive deep into the principles, develop
 
 #### Program
 
-– A quick review of the Kubernetes core domain concepts  
-- Troubleshooting and debugging Applications on Kubernetes  
-– Cloud Native application design: architectural patterns for distributed systems  
-– Container security, effective RBAC and secrets management  
-- Distribution and Delivery of cloud native applications  
-– Kubernetes monitoring principles, exporting application metrics for Prometheus  
-– Rock solid scalable logging strategies  
-– Running stateful applications in Kubernetes: Operators and the current state of databases in Kubernetes  
+1. A quick review of the Kubernetes core domain concepts  
+2. Troubleshooting and debugging Applications on Kubernetes  
+3. Cloud Native application design: architectural patterns for distributed systems  
+4. Container security, effective RBAC and secrets management  
+5. Distribution and Delivery of cloud native applications  
+6. Kubernetes monitoring principles, exporting application metrics for Prometheus  
+7. Rock solid scalable logging strategies  
+8. Running stateful applications in Kubernetes: Operators and the current state of databases in Kubernetes  
 
 You can contact the authors of this workshop by email at [training@sighup.io](mailto:training@sighup.io)
 
