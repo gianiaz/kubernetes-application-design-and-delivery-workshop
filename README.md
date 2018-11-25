@@ -75,10 +75,15 @@ Install `kustomize` and `helm`. To install Kustomize, [here you can find the ins
 
 ### Using Minikube
 
-On macOS:  
-```shell
-```
+Use the following commands to start a minikube cluster and link it to your local installation of docker.
 
-On Linux:  
 ```shell
+# Starting a local minikube cluster of 1 node
+minikube start --cpus=2 --memory=4096 --kubernetes-version=v1.11.4
+# Checking nodes
+kubectl get pods
+# Using docker from minikube
+eval $(minikube docker-env)
+# Check if linking succeeded
+docker ps
 ```
