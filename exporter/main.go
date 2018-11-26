@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"math"
 	"time"
@@ -15,5 +14,5 @@ func main() {
 
 func load(c *gin.Context) {
 	now := float64(time.Now().Unix())
-	c.JSON(200, gin.H{"load": fmt.Sprintf("%v", math.Abs(math.Cos(now/100)))})
+	c.JSON(200, gin.H{"load": math.Abs(math.Cos(now / 100))})
 }
