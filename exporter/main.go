@@ -2,18 +2,18 @@ package main
 
 import (
 	"fmt"
-	"io"
+	"github.com/gin-gonic/gin"
 	"math"
-	"net/http"
 	"time"
 )
 
 func main() {
-	http.HandleFunc("/load", load)
-	http.ListenAndServe(":3000", nil)
+	r := gin.Default()
+	r.GET("/load", load)
+	r.Run(":3000")
 }
 
-func load(w http.ResponseWriter, r *http.Request) {
+func load(c *gin.Context) {
 	now := float64(time.Now().Unix())
-	io.WriteString(w, fmt.Sprintf("%v", math.Abs(math.Cos(now/100))))
+	c.JSON(200, gin.H{"load": fmt.Sprintf("%v", math.Abs(math.Cos(now/100)))})
 }
