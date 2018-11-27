@@ -1,3 +1,4 @@
+{{- if .Values.backend.autoscaler.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,7 +15,7 @@ spec:
     spec:
       serviceAccountName: autoscaler
       containers:
-      - image: phisco/autoscaler
+      - image: {{ .Values.backend.autoscaler.image }}
         imagePullPolicy: Always
         name: autoscaler
         env:
@@ -24,15 +25,16 @@ spec:
               apiVersion: v1
               fieldPath: metadata.namespace
         - name: DEPLOYMENT_NAME
-          value: powerapp-backend
+          value: {{ .Values.backend.name }}
         - name: TARGET_SERVICE
-          value: powerapp-backend-service
+          value: {{ .Values.backend.name }}
         - name: TARGET_PORT
           value: "3000"
         - name: MIN_REPLICAS
-          value: "1"
+          value: {{ .Values.backend.autoscaler.min }}
         - name: MAX_REPLICAS
-          value: "10"
+          value: {{ .Values.backend.autoscaler.max }}
         - name: SECONDS
-          value: "10"
+          value: {{ .Values.backend.autoscaler.seconds }}
       restartPolicy: Always
+{{- end }}

@@ -1,4 +1,0 @@
-namespace: workshop
-resources:
-- deploy.yml
-- rbac.yml

@@ -1,0 +1,30 @@
+web:
+  name: "powerapp-web"
+  image: "sighup/kubeprimer-web"
+  replicas: 3
+  company: "SIGHUP srl"
+  description: "Just a random variabled"
+  configMapName: "web"
+  secretName: "web"
+  password: "ciao"
+
+backend:
+  name: "powerapp-backend"
+  image: "sighup/kubeprimer-backend"
+  replicas: 1
+  exporter: true
+  autoscaler:
+    enabled: true
+    image: "phisco/autoscaler"
+    serviceAccount: "autoscaler"
+    min: "1"
+    max: "10"
+    sleep: "10"
+
+mongo:
+  name: "powerapp-mongodb"
+  image: "mongo:3.7.3"
+  replicas: "1"
+  volume:
+    enabled: true
+    claimName: "powerapp-db-volume"

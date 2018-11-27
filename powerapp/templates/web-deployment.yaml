@@ -2,32 +2,30 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: powerapp-web
-  name: powerapp-web
+    app: {{ .Values.web.name }}
+  name: {{ .Values.web.name }}
 spec:
-  replicas: 3
+  replicas: {{ .Values.web.replicas }}
   template:
     metadata:
       labels:
-        app: powerapp-web
+        app: {{ .Values.web.name }}
     spec:
       containers:
-      - name: powerapp-web
-        image: sighup/kubeprimer-web
+      - name: web
+        image: {{ .Values.web.image }}
         env:
         - name: BACKEND_HOST
-          value: powerapp-backend-service
-        # How to use a configmap
+          value: {{ .Values.backend.name }}
         - name: COMPANY
           valueFrom:
             configMapKeyRef:
-              name: web
+              name: {{ .Values.web.configMapName }}
               key: COMPANY
-        # How to use a Secret
         - name: SOME_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: web
+              name: {{ .Values.web.secretName }}
               key: some-password
         ports:
         - containerPort: 80

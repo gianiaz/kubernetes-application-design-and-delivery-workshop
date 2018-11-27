@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.web.configMapName }}
+data:
+  COMPANY: {{ .Values.web.company }}
+  SOME_VAR: {{ .Values.web.description }}

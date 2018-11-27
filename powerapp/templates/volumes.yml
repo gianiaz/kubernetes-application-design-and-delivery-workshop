@@ -2,8 +2,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    app: powerapp-db-volume
-  name: powerapp-db-volume
+    app: {{ .Values.mongo.volume.claimName }}
+  name: {{ .Values.mongo.volume.claimName }}
 spec:
   accessModes:
   - ReadWriteOnce

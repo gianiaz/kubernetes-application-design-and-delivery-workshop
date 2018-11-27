@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.mongo.name }}
+  name: {{ .Values.mongo.name }}
+spec:
+  replicas: {{ .Values.mongo.replicas }}
+  # strategy used to replace old pods by new ones.
+  strategy:
+    type: Recreate # All existing pods are killed before creating new ones
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.mongo.name }}
+      name: {{ .Values.mongo.name }}
+    spec:
+      containers:
+      - name: mongo
+        image: {{ .Values.mongo.image }}
+        ports:
+        - containerPort: 27017
+        {{- if .Values.mongo.volume.enabled }}
+        volumeMounts:
+        - mountPath: /data/db
+          name: mongo-data
+        {{- end }}
+      restartPolicy: Always
+      {{- if .Values.mongo.volume.enabled }}
+      volumes:
+      - name: mongo-data
+        persistentVolumeClaim:
+          claimName: {{ .Values.mongo.volume.claimName }}
+      {{- end }}

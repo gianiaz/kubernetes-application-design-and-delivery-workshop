@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   labels:
     app: powerapp-backend
-  name: powerapp-backend
+  name: {{ .Values.backend.name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.backend.replicas }}
   template:
     metadata:
       labels:
-        app: powerapp-backend
+        app: {{ .Values.backend.name }}
     spec:
       containers:
-      - name: powerapp-backend
-        image: sighup/kubeprimer-backend
+      - name: backend
+        image: {{ .Values.backend.image }}
         env:
         - name: MONGO_HOST
-          value: powerapp-mongodb-service
+          value: {{ .Values.mongo.name }}
         resources:
           requests:
             memory: "128Mi"
@@ -24,6 +24,8 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "200m"
+      {{- if .Values.backend.exporter }}
       - image: phisco/exporter
         name: exporter
+      {{- end }}
       restartPolicy: Always
