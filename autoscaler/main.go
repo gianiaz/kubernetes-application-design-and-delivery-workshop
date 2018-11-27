@@ -9,6 +9,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/util/retry"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -25,13 +26,20 @@ func main() {
 	port := os.Getenv("TARGET_PORT")
 	namespace := os.Getenv("NAMESPACE")
 	min, err := strconv.Atoi(os.Getenv("MIN_REPLICAS"))
+	if err != nil {
+		panic(err.Error())
+	}
 	max, err := strconv.Atoi(os.Getenv("MAX_REPLICAS"))
+	if err != nil {
+		panic(err.Error())
+	}
 	delta_t, err := strconv.Atoi(os.Getenv("SECONDS"))
 	var desired_replicas int32
 	if err != nil {
 		panic(err.Error())
 	}
 	endpoint := fmt.Sprintf("http://%s:%s/load", service, port)
+	log.Printf("target %s, namespace %s, deployment %s, min %v, max %v, sleep %v", endpoint, namespace, deployment_name, min, max, delta_t)
 	config, err := rest.InClusterConfig()
 	var load LoadMsg
 	if err != nil {
@@ -44,9 +52,10 @@ func main() {
 
 	deploymentsClient := clientset.AppsV1().Deployments(namespace)
 	for {
+		log.Printf("Let's try contact %s", endpoint)
 		resp, err := http.Get(endpoint)
 		if err != nil {
-			fmt.Printf("Error connectig to %s, will retry in %v seconds", endpoint, delta_t)
+			log.Printf("Error connectig to %s, will retry in %v seconds", endpoint, delta_t)
 		} else {
 			defer resp.Body.Close()
 			body, _ := ioutil.ReadAll(resp.Body)
@@ -54,14 +63,14 @@ func main() {
 			retryErr := retry.RetryOnConflict(retry.DefaultRetry, func() error {
 				result, err := deploymentsClient.Get(deployment_name, metav1.GetOptions{})
 				if errors.IsNotFound(err) {
-					fmt.Printf("Deployment %s not found\n", deployment_name)
+					log.Printf("Deployment %s not found\n", deployment_name)
 				} else if statusError, isStatus := err.(*errors.StatusError); isStatus {
-					fmt.Printf("Error getting deployment %v\n", statusError.ErrStatus.Message)
+					log.Printf("Error getting deployment %v\n", statusError.ErrStatus.Message)
 				} else if err != nil {
 					panic(err.Error())
 				}
-				desired_replicas = int32(min + int(load.Load*float32(max-min)))
-				fmt.Printf("Load: %v, desired replicas: %v, actual replicas: %v", load.Load, desired_replicas, result.Spec.Replicas)
+				desired_replicas = int32(float32(min) + load.Load*float32(max-min))
+				log.Printf("Load: %v, desired replicas: %v, actual replicas: %v", load.Load, desired_replicas, *result.Spec.Replicas)
 				result.Spec.Replicas = &desired_replicas
 				_, updateErr := deploymentsClient.Update(result)
 				return updateErr
