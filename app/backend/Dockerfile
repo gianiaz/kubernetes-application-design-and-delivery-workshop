@@ -1,4 +1,4 @@
-FROM node:8.1.3
+FROM node:10.13.0
 
 RUN apt-get -y update && \
     apt-get -y install vim wget curl
