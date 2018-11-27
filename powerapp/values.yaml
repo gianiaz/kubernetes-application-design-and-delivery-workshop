@@ -15,7 +15,7 @@ backend:
   exporter: true
   autoscaler:
     enabled: true
-    image: "phisco/autoscaler"
+    image: "sighup/autoscaler"
     serviceAccount: "autoscaler"
     min: "1"
     max: "10"

@@ -25,7 +25,7 @@ spec:
             memory: "256Mi"
             cpu: "200m"
       {{- if .Values.backend.exporter }}
-      - image: phisco/exporter
+      - image: sighup/exporter
         name: exporter
       {{- end }}
       restartPolicy: Always
