@@ -14,7 +14,7 @@ spec:
     spec:
       serviceAccountName: autoscaler
       containers:
-      - image: phisco/autoscaler
+      - image: sighup/autoscaler
         imagePullPolicy: Always
         name: autoscaler
         env:

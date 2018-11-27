@@ -24,6 +24,6 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "200m"
-      - image: phisco/exporter
+      - image: sighup/exporter
         name: exporter
       restartPolicy: Always
