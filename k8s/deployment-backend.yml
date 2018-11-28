@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: node-backend
+spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: node
+    template:
+      metadata:
+        labels:
+          app: node
+      spec:
+        containers:
+          - name: node
+            image: sighup/kubeprimer-backend
+            ports:
+              - containerPort: 80
+            env:
+              - name: MONGO_HOST
+                value: mongo-service
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: node-service
+spec:
+  selector:
+    app: node
+  ports:
+    - port: 80
+      targetPort: 80

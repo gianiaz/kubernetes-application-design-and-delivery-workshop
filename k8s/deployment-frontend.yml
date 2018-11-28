@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: php-frontend
+spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app: php
+    template:
+      metadata:
+        labels:
+          app: php
+      spec:
+        containers:
+          - name: php-container
+            image: sighup/kubeprimer-web
+            ports:
+              - containerPort: 80
+            env:
+              - name: BACKEND_HOST
+                value: node-service
+              - name: COMPANY
+                value: Facile.it
+              - name: SOME_PASSWORD
+                value: nonlaso
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: php-service
+spec:
+  selector:
+    app: php
+  ports:
+    - port: 80
+      targetPort: 80
