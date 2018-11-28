@@ -8,6 +8,10 @@ spec:
   rules:
     - http:
         paths:
+          - path: /sidecar
+            backend:
+              serviceName: node-service
+              servicePort: 3000
           - path: /
             backend:
               serviceName: php-service
